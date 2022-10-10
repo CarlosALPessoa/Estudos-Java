@@ -1,106 +1,30 @@
-import java.util.Random;
+public class RelacionamentoClasses {
 
-public class Luta {
-    private Lutador desafiado;
-    private Lutador desafiante;
-    private Integer round;
-    private boolean aprovado;
-    
-    //Construtor
-    public Luta(Lutador desafiado, Lutador desafiante){
-        this.desafiado = desafiado;
-        this.desafiante = desafiante;
-        this.round = 0;
-        this.aprovado = false;
-        System.out.println("Início do Torneio de Luta");
-    }
-    
-    //Métodos
-    public void marcarLuta(Integer round)
-    {
-        if(desafiado.getCategoria().equals(desafiante.getCategoria()) && !desafiado.getNome().equals(desafiante.getNome())){
-            if(!(isAprovado())){
-                this.setRound(round);
-                this.setAprovado(true);
-            }
-        }
-        else{
-            System.out.println("Lutadores não estão na mesma categoria!");
-        }
-    }
-    
-    public void lutar(){
-        if(isAprovado()){
-            System.out.println("Apresentação dos lutadores, desafiado vs desafiante: \n");
-            desafiado.apresentar();
-            System.out.println("\n");
-            desafiante.apresentar();
-            System.out.println("\n***********************************\n");
-            
-            for(int x = 0; x < getRound(); x++){
-                Random aletorio = new Random();
-                int aleatorio = aletorio.nextInt(2);
-                switch (aleatorio) {
-                    case 1 -> {
-                        System.out.println("O vencedor foi: " + desafiado.getNome());
-                        desafiado.ganharLuta();
-                        desafiante.perderLuta();
-                        
-                        System.out.println("Total de vitórias do ganhador: "+desafiado.getWin());
-                        System.out.println("Total de derrotas do perdedor: "+desafiante.getLose());
-                        System.out.println("\n***********************************\n");
-                    }
-                    case 2 -> {
-                        System.out.println("O vencedor foi: " + desafiante.getNome());
-                        desafiante.ganharLuta();
-                        desafiado.perderLuta();
-                        
-                        System.out.println("Total de vitórias do ganhador: "+desafiante.getWin());
-                        System.out.println("Total de derrotas do perdedor: "+desafiado.getLose());
-                        System.out.println("\n***********************************\n");
-                    }
-                    default -> {
-                        System.out.println("A luta entre: " + desafiado.getNome() + " vs " + desafiante.getNome() + ", deu empate!");
-                        desafiado.empatarLuta();
-                        desafiante.empatarLuta();
-                        
-                        System.out.println("Respectivos empates dos lutadores: " +desafiado.getTie() +" vs " + desafiante.getTie());
-                        System.out.println("\n***********************************\n");
-                    }
-                }
-            }
-            System.out.println("Fim do Torneio!");
-        }
-        else{
-            System.out.println("A luta não foi aprovada!");
-        }
-    }
-
-    //Setters
-    public void setDesafiado(Lutador desafiado) {
-        this.desafiado = desafiado;
-    }
-    public void setDesafiante(Lutador desafiante) {
-        this.desafiante = desafiante;
-    }
-    public void setRound(Integer round) {
-        this.round = round;
-    }
-    public void setAprovado(boolean aprovado) {
-        this.aprovado = aprovado;
-    }
-    
-    //Getters
-    public Lutador getDesafiado() {
-        return desafiado;
-    }
-    public Lutador getDesafiante() {
-        return desafiante;
-    }
-    public Integer getRound() {
-        return round;
-    }
-    public boolean isAprovado() {
-        return aprovado;
+    public static void main(String[] args) {
+        Lutador[] lut = new Lutador[6];
+        lut[0] = new Lutador("Pretty", "França", 31, 1.75, 68.9, 11, 2, 1);
+        lut[1] = new Lutador("Putscripty", "Brasil", 29, 1.68, 57.8, 14, 2, 3);
+        lut[2] = new Lutador("Snapshadow", "EUA", 35, 1.65, 80.9, 12, 2, 1);
+        lut[3] = new Lutador("Dead Code", "Austrália", 28, 1.93,81.6,13,0,2);
+        lut[4] = new Lutador("Ufocobol", "Brasil", 37,1.70,119.3,5,4,3);
+        lut[5] = new Lutador("Nerdoard", "EUA", 30, 1.81, 105.7, 12, 2, 4);
+        
+       /* //Apresentação dos lutadores:
+        for(int i = 0; i < 5; i++){
+            lut[i].apresentar();
+            System.out.println("\n*********************************\n");
+            lut[i].status();
+            System.out.println("\n######################\n");
+        }*/
+        
+        //TODO: Entre lutadores de categorias diferentes!
+        /*Luta UFC01 = new Luta(lut[1], lut[2]);
+        
+        UFC01.marcarLuta(3);
+        UFC01.lutar();*/
+        
+        Luta UFC01 = new Luta(lut[1], lut[0]);
+        UFC01.marcarLuta(4);
+        UFC01.lutar();
     }
 }
